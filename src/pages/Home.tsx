@@ -18,46 +18,30 @@ const springTransition = {
 };
 export default function Home() {
   return <div className="flex flex-col min-h-screen relative">
-      {/* Header with Logo */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between h-16 sm:h-20">
-            <div className="flex items-center">
-              <img 
-                src={IMAGES.SCREENSHOT4568_36} 
-                alt="Airteknics Logo" 
-                className="h-8 sm:h-10 w-auto"
-              />
-            </div>
-            <div className="hidden md:flex items-center">
-              <Button 
-                variant="outline"
-                onClick={() => window.location.href = formatPhoneForLink(COMPANY_INFO.phone)}
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-              >
-                <Phone className="mr-2 h-4 w-4" />
-                Call Now
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Mobile Floating CTA */}
       <div className="fixed bottom-4 left-4 right-4 z-40 md:hidden">
         <div className="flex gap-2">
-          <Button onClick={() => scrollToSection("hero")} className="flex-1 h-14 text-base font-semibold bg-primary hover:bg-primary/90 shadow-2xl rounded-2xl border-2 border-white/20">
-            <Phone className="mr-2 h-4 w-4" />
+          {/* Get Quote button */}
+          <Button 
+            onClick={() => scrollToSection("contact-form")} 
+            className="flex-1 h-14 text-sm font-semibold bg-primary hover:bg-primary/90 text-primary-foreground shadow-2xl rounded-2xl border border-white/20 flex items-center justify-center"
+          >
+            <ClipboardCheck className="mr-1.5 h-4 w-4" />
             Get Quote
           </Button>
-          <Button onClick={() => window.open(formatWhatsAppLink(COMPANY_INFO.whatsapp, "Hi, I'm interested in PVC Strip Curtains for my business in Karnataka. Please send me a quote."), '_blank')} className="h-14 px-4 bg-green-500 hover:bg-green-600 shadow-2xl rounded-2xl border-2 border-white/20">
+
+          {/* WhatsApp button */}
+          <Button 
+            onClick={() => window.open(formatWhatsAppLink(COMPANY_INFO.whatsapp, "Hi, I'm interested in PVC Strip Curtains for my business in Karnataka. Please send me a quote."), '_blank')} 
+            className="h-14 px-4 bg-green-500 hover:bg-green-600 text-white shadow-2xl rounded-2xl border border-white/20 flex items-center justify-center shrink-0"
+          >
             <MessageCircle className="h-5 w-5" />
           </Button>
         </div>
       </div>
       
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-[65vh] md:min-h-[70vh] lg:min-h-[75vh] flex items-center pt-20 sm:pt-24 lg:pt-28 overflow-hidden bg-background">
+      <section id="hero" className="relative min-h-[65vh] md:min-h-[70vh] lg:min-h-[75vh] flex items-center pt-10 sm:pt-12 lg:pt-16 overflow-hidden bg-background">
         <div className="absolute inset-0 z-0">
           <img src={IMAGES.INDUSTRIAL_INTERIOR_1} alt="Industrial Facility" className="w-full h-full object-cover opacity-10" />
         </div>
@@ -95,7 +79,7 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <Button onClick={() => scrollToSection("contact")} className="bg-primary hover:bg-primary/90 text-primary-foreground h-12 sm:h-14 px-6 sm:px-8 w-full sm:w-auto font-semibold">
+                <Button onClick={() => scrollToSection("contact-form")} className="bg-primary hover:bg-primary/90 text-primary-foreground h-12 sm:h-14 px-6 sm:px-8 w-full sm:w-auto font-semibold">
                   Get Free Quote
                 </Button>
                 <Button variant="outline" onClick={() => window.open(formatWhatsAppLink(COMPANY_INFO.whatsapp, "Hi, I'm interested in PVC Strip Curtains for my business in Karnataka. Please send me a quote."), '_blank')} className="border-primary text-primary hover:bg-primary hover:text-primary-foreground h-12 sm:h-14 px-6 sm:px-8 w-full sm:w-auto font-semibold">
@@ -208,7 +192,7 @@ export default function Home() {
                     <span className="font-medium">{industry}</span>
                   </div>)}
               </div>
-              <Button className="mt-10" variant="link" onClick={() => scrollToSection("contact")}>
+              <Button className="mt-10" variant="link" onClick={() => scrollToSection("contact-form")}>
                 Consult for your industry <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
@@ -380,7 +364,7 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                 <Button 
-                  onClick={() => scrollToSection("contact")}
+                  onClick={() => scrollToSection("contact-form")}
                   className="bg-primary hover:bg-primary/90 text-primary-foreground h-12 px-8 font-semibold"
                 >
                   Schedule Site Visit
@@ -498,7 +482,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div>
+              <div id="contact-form">
                 <LeadForm />
               </div>
             </div>

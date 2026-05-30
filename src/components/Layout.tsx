@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SiFacebook, SiLinkedin, SiX } from "react-icons/si";
 import { COMPANY_INFO, formatPhoneForLink, scrollToSection } from "@/lib/index";
 import { Button } from "@/components/ui/button";
+import { IMAGES } from "@/assets/images";
+
 interface LayoutProps {
   children: React.ReactNode;
 }
@@ -74,28 +76,53 @@ export function Layout({
       <header className={`sticky top-0 z-50 w-full transition-all duration-300 border-b ${isScrolled ? "bg-background/95 backdrop-blur-md shadow-sm py-2 sm:py-3" : "bg-background py-3 sm:py-5"}`}>
         <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" onClick={e => handleNavClick(e, "#")} className="flex items-center gap-2 group">
-            
-            <div className="flex flex-col">
-              
-              
-            </div>
+          <a href="#" onClick={e => handleNavClick(e, "#")} className="flex items-center gap-2 group shrink-0">
+            <img 
+              src={IMAGES.SCREENSHOT4568_36} 
+              alt="Airteknics Logo" 
+              className="h-8 sm:h-10 w-auto object-contain"
+            />
           </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          {/* Desktop Navigation - Centered */}
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8 mx-auto">
             {navItems.map(item => <a key={item.name} href={item.href} onClick={e => handleNavClick(e, item.href)} className="text-sm font-semibold text-muted-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all hover:after:w-full">
                 {item.name}
               </a>)}
-            <Button onClick={() => scrollToSection("contact")} className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-4 sm:px-6 font-semibold shadow-lg shadow-primary/20 text-sm">
-              Get a Quote
-            </Button>
           </nav>
 
-          {/* Mobile Menu Toggle */}
-          <button className="md:hidden p-2 text-foreground" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Desktop Actions - Right Aligned */}
+          <div className="hidden md:flex items-center gap-4 shrink-0">
+            <Button 
+              variant="outline"
+              onClick={() => window.location.href = formatPhoneForLink(COMPANY_INFO.phone)}
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold rounded-full px-4 text-sm h-10"
+            >
+              <Phone className="mr-2 h-4 w-4" />
+              Call Now
+            </Button>
+            
+            <Button onClick={() => scrollToSection("contact-form")} className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-5 font-semibold shadow-lg shadow-primary/20 text-sm h-10">
+              Get a Quote
+            </Button>
+          </div>
+
+          {/* Mobile Actions & Menu Toggle */}
+          <div className="flex items-center gap-2 md:hidden">
+            <Button 
+              variant="outline"
+              size="sm"
+              onClick={() => window.location.href = formatPhoneForLink(COMPANY_INFO.phone)}
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold rounded-full px-3 text-xs flex items-center h-9"
+            >
+              <Phone className="mr-1 h-3.5 w-3.5" />
+              Call
+            </Button>
+            
+            <button className="p-2 text-foreground rounded-lg hover:bg-muted/50 transition-colors" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation Overlay */}
@@ -115,10 +142,19 @@ export function Layout({
                     {item.name}
                     <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
                   </a>)}
+                
+                <Button 
+                  onClick={() => window.location.href = formatPhoneForLink(COMPANY_INFO.phone)}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 text-base mt-4 rounded-xl shadow-md flex justify-center items-center font-bold"
+                >
+                  <Phone className="mr-2 h-4 w-4" />
+                  Call Now: {COMPANY_INFO.phone}
+                </Button>
+                
                 <Button onClick={() => {
-              scrollToSection("contact");
-              setIsMenuOpen(false);
-            }} className="w-full bg-primary py-4 text-base mt-6 rounded-xl shadow-lg">
+                  scrollToSection("contact-form");
+                  setIsMenuOpen(false);
+                }} className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-4 text-base rounded-xl shadow-lg font-bold">
                   Request Consultation
                 </Button>
               </div>
